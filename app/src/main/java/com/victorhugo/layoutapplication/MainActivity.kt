@@ -1,6 +1,7 @@
 package com.victorhugo.layoutapplication
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -13,19 +14,6 @@ import com.victorhugo.layoutapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    //valor total da conta
-    //numero de pessoas
-    //porcentagem de gorjeta
-    //10% , 15% ou 20%
-    //calcular
-    //limpar
-    //Recuperar as Views do layout
-    //Find view by id
-    //ViewBinding
-
-    //Recuperar os radio buttons
-    //calculo de tips
-    //mostrar resultado
 
     private lateinit var binding: ActivityMainBinding
 
@@ -35,52 +23,48 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var percentage: Int = 0
-        binding.rbOptionOne.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                percentage = 10
-            }
-        }
-
-        binding.rbOptionTwo.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                percentage = 15
-            }
-        }
-
-        binding.rbOptionThree.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                percentage = 20
-            }
-        }
-
 
         binding.btnDone.setOnClickListener {
             val totaltabletemp = binding.tieTotal.text
+            val numPeopleTemp = binding.tieNumPeople.text
+            val percentageTemp = binding.tiePercentage.text
 
-            if (totaltabletemp?.isEmpty() == true
-                ) {
-                Snackbar.make(binding.tieTotal, "Preencha todos os campos",Snackbar.LENGTH_LONG)
+            if (totaltabletemp?.isEmpty() == true ||
+                numPeopleTemp?.isEmpty() == true ||
+                percentageTemp?. isEmpty() == true
+            ) {
+                Snackbar.make(binding.tieTotal, "Preencha todos os campos", Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 val totalTable: Float = binding.tieTotal.text.toString().toFloat()
-                val nPeople: Int = binding.tieNumPeople.text.toString().toInt()
+                val nPeople: Int = numPeopleTemp.toString().toInt()
+                val percentage: Int = percentageTemp.toString().toInt()
 
                 val totaltemp = totalTable / nPeople
                 val tips = totaltemp * percentage / 100
                 val totalwithtips = totaltemp + tips
-                binding.tvResult.text = "Total with tips: $totalwithtips"
-            }
 
-            binding.btnClean.setOnClickListener {
-                binding.tvResult.text = ""
-                binding.tieTotal.setText("")
-                binding.tieNumPeople.setText("")
-                binding.rbOptionOne.isChecked = false
-                binding.rbOptionTwo.isChecked = false
-                binding.rbOptionThree.isChecked = false
-
+                val intent = Intent(this, SammuryActivity::class.java)
+                intent.apply {
+                    putExtra("totalTable", totalTable)
+                    putExtra("numPeople", nPeople)
+                    putExtra("percentage", percentage)
+                    putExtra("totalAmount", totalwithtips)
+                }
+                clean()
+                startActivity(intent)
             }
         }
+
+        binding.btnClean.setOnClickListener {
+            clean()
+        }
+    }
+
+    private fun clean() {
+        binding.tieTotal.setText("")
+        binding.tiePercentage.setText("")
+        binding.tieNumPeople.setText("")
+
     }
 }
