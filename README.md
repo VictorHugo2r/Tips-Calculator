@@ -5,7 +5,7 @@ Calculadora de Gorjetas foi o segundo aplicativo que desenvolvi, com a intensão
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
-<img src="/result/image1.png" width="260">&emsp;<img src="/result/image2.png" width="260">&emsp;<img src="/result/image3.png" width="260">
+<img src="/result/imagem1.png" width="260">&emsp;<img src="/result/imagem2.png" width="260">&emsp;<img src="/result/imagem3.png" width="260">
 
 ## Tecnologias
 * Kotlin
