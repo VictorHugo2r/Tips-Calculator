@@ -22,6 +22,16 @@ Calculadora de Gorjetas foi o segundo aplicativo que desenvolvi, com a intensão
 
 ### TODO
 - Melhorar estilização do app
+° Activity para host de telas
+° ViewGroup
+ ConstraintLayout
+° MaterialButton
+° Components de UI
+ TextView
+ TextInputEditText
+ Button
+° StringResources
+° Intentexplicita
 
 ## Author
 Victor Hugo F. Dos Santos Chaves (follow me on [Linkedln](https://www.linkedin.com/in/victor-hugo-829aa2265)) 
